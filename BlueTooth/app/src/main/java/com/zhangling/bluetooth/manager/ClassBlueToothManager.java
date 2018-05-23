@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
+import android.widget.Switch;
 
 import com.zhangling.bluetooth.Application;
 import com.zhangling.bluetooth.base.BaseActivity;
@@ -29,6 +30,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
+import static android.bluetooth.BluetoothDevice.BOND_BONDED;
+import static android.bluetooth.BluetoothDevice.BOND_BONDING;
+import static android.bluetooth.BluetoothDevice.BOND_NONE;
 
 
 /**
@@ -141,6 +146,7 @@ public class ClassBlueToothManager {
     };
 
     public void search(){
+
         // Register the BroadcastReceiver
         if (mReceiver.getResultCode() != 0){
             mContext.unregisterReceiver(mReceiver);
@@ -152,7 +158,7 @@ public class ClassBlueToothManager {
 
     }
 
-    public void connect(BluetoothDevice device){
+    public boolean connect(BluetoothDevice device){
         if (mStateReceiver.getResultCode() != 0){
             mContext.unregisterReceiver(mStateReceiver);
         }
@@ -163,8 +169,19 @@ public class ClassBlueToothManager {
         mContext.registerReceiver(mStateReceiver, filter1);
         mContext.registerReceiver(mStateReceiver, filter3);
         mContext.registerReceiver(mStateReceiver, filter2);
-        ConnectThread connect = new ConnectThread(device);
-        connect.start();
+        switch (device.getBondState()){
+            case BOND_NONE:
+                device.createBond();
+                return false;
+            case BOND_BONDED:
+                ConnectThread connect2 = new ConnectThread(device);
+                connect2.start();
+                return true;
+            case BOND_BONDING:
+                return false;
+        }
+        return false;
+
     }
 
 

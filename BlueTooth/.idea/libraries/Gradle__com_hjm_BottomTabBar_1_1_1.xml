@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.hjm:BottomTabBar-1.1.1">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/BottomTabBar-1.1.1.aar/60f118eecc75ed3cbb55eaf682891a8e/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/BottomTabBar-1.1.1.aar/60f118eecc75ed3cbb55eaf682891a8e/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hjm/BottomTabBar/1.1.1/84c36f471ae992825beeb45844a276f03bcf76bc/BottomTabBar-1.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

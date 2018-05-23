@@ -97,9 +97,10 @@ public class HomeFragment extends Fragment {
                             public void onListItemClick(AdapterView<?> l, View v, int position, long id) {
                                 BluetoothDevice device = mBlueToothListView.getClassListAdapter().getDevice(position);
                                 mSelectedClassDevice = device;
-                                ClassBlueToothManager.getInstance().connect(device);
-                                mBlueToothListView.setVisibility(View.INVISIBLE);
-
+                                boolean isConnected = ClassBlueToothManager.getInstance().connect(device);
+                                if (isConnected){
+                                    mBlueToothListView.setVisibility(View.INVISIBLE);
+                                }
                             }
                         };
                         container2.startToStart = blueToothSuperView.getId();
