@@ -15,8 +15,12 @@ import android.widget.AdapterView;
 
 import com.hjm.bottomtabbar.BottomTabBar;
 import com.inuker.bluetooth.library.search.SearchResult;
+import com.orhanobut.logger.Logger;
+import com.zhangling.bluetooth.activity.DataFragment;
 import com.zhangling.bluetooth.activity.HomeActivity;
 import com.zhangling.bluetooth.activity.HomeFragment;
+import com.zhangling.bluetooth.activity.MeFragment;
+import com.zhangling.bluetooth.activity.SensorFragment;
 import com.zhangling.bluetooth.adapter.ClassDeviceListAdapter;
 import com.zhangling.bluetooth.adapter.DeviceListAdapter;
 import com.zhangling.bluetooth.base.BaseActivity;
@@ -24,6 +28,8 @@ import com.zhangling.bluetooth.manager.BlueToothManager;
 import com.zhangling.bluetooth.manager.ClassBlueToothManager;
 import com.zhangling.bluetooth.util.ZLUtil;
 import com.zhangling.bluetooth.view.DeviceListView;
+
+import java.text.DateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,22 +69,22 @@ public class MainActivity extends BaseActivity {
         mNavigationViewModel.setRightIconNameId(R.mipmap.add);
         updateNavigationView();
 
-        mBottomTabBar.init(getSupportFragmentManager())
-                .setImgSize(50,50)
-                .setFontSize(8)
-                .setTabPadding(4,6,10)
+        mBottomTabBar
+                .init(getSupportFragmentManager(),720, 1280)
                 .setChangeColor(getResources().getColor(R.color.colorPrimary),Color.DKGRAY)
                 .addTabItem("首页",R.mipmap.icon_tabbar_home, HomeFragment.class)
-                .addTabItem("客观数据",R.mipmap.ic_drive_analy, HomeFragment.class)
-                .addTabItem("陀螺仪",R.mipmap.ic_tabbar_tly, HomeFragment.class)
-                .addTabItem("我的",R.mipmap.ic_tabbar_me, HomeFragment.class)
-                .isShowDivider(false)
+                .addTabItem("客观数据",R.mipmap.ic_drive_analy, DataFragment.class)
+                .addTabItem("陀螺仪",R.mipmap.ic_tabbar_tly, SensorFragment.class)
+                .addTabItem("我的",R.mipmap.ic_tabbar_me, MeFragment.class)
                 .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
                     @Override
-                    public void onTabChange(int position, String name) {
+                    public void onTabChange(int position, String name, View view) {
+                        Logger.i("%d,%s",position,name);
+                    }//添加选项卡切换监听
+                }).setCurrentTab(0);
 
-                    }
-                });
+
+
 
     }
 

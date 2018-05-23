@@ -46,5 +46,5 @@ dependencies {
 
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
-    implementation 'com.hjm:BottomTabBar:1.1.1'
+    implementation 'com.hjm:BottomTabBar:1.2.0'
 }

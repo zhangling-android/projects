@@ -38,7 +38,6 @@ import static com.zhangling.bluetooth.manager.RxBusManager.SearchClassDevice;
 import static com.zhangling.bluetooth.manager.RxBusManager.SearchDevice;
 
 public class HomeFragment extends Fragment {
-    public View mView;
     @BindView(R.id.view)
     public ConstraintLayout contentView;
     DeviceListView mBlueToothListView;
