@@ -44,8 +44,8 @@ public class Application extends android.app.Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        configRealm();
         context = this;
+        configRealm();
         configLoger();
         registerNetworkReceiver(new NetworkConnectChangedReceiver(),new IntentFilter());
 
@@ -88,6 +88,7 @@ public class Application extends android.app.Application{
                 .schemaVersion(0)
                 .build();
         Realm.setDefaultConfiguration(config);
+        configAppConfigModel();
     }
 
     public void configAppConfigModel(){
