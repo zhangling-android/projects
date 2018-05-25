@@ -24,11 +24,15 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.zhangling.bluetooth.manager.UploadFileManager;
+import com.zhangling.bluetooth.model.db.AppConfigDBModel;
 import com.zhangling.bluetooth.receiver.NetworkConnectChangedReceiver;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 
 /**
@@ -40,22 +44,17 @@ public class Application extends android.app.Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        configRealm();
         context = this;
-//        Realm.init(this);
-//        RealmConfiguration config = new RealmConfiguration.Builder().build();
-//        Realm.setDefaultConfiguration(config);
         configLoger();
-//        UploadFileManager.getInstance().config();
         registerNetworkReceiver(new NetworkConnectChangedReceiver(),new IntentFilter());
+
+
+
+
     }
 
     private void configLoger(){
-        /*Logger.d("debug");
-        Logger.e("error");
-        Logger.w("warning");
-        Logger.v("verbose");
-        Logger.i("information");
-        Logger.wtf("wtf!!!!");*/
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(true)  // (Optional) Whether to show thread info or not. Default true
                 .methodCount(0)         // (Optional) How many method line to show. Default 2
@@ -80,5 +79,30 @@ public class Application extends android.app.Application{
     public void registerNetworkReceiver(NetworkConnectChangedReceiver receiver, IntentFilter filter) {
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         context.registerReceiver(receiver,filter);
+    }
+
+    public void configRealm(){
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .name("BlueTooth.realm") //文件名
+                .schemaVersion(0)
+                .build();
+        Realm.setDefaultConfiguration(config);
+    }
+
+    public void configAppConfigModel(){
+        Realm  mRealm= Realm.getDefaultInstance();
+        AppConfigDBModel appConfigDBModel = mRealm.where(AppConfigDBModel.class)
+                .equalTo("id", getPackageName()).findFirst();
+        if (appConfigDBModel == null){
+            final AppConfigDBModel appConfigDBModel1 = new AppConfigDBModel();
+            mRealm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.copyToRealm(appConfigDBModel1);
+
+                }
+            });
+        }
     }
 }

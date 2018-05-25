@@ -14,6 +14,7 @@ import com.zhangling.bluetooth.manager.ClassBlueToothManager;
 import com.zhangling.bluetooth.manager.UploadFileManager;
 import com.zhangling.bluetooth.model.ResponseModel;
 import com.zhangling.bluetooth.model.UI.UserModel;
+import com.zhangling.bluetooth.model.db.AppConfigDBModel;
 import com.zhangling.bluetooth.model.rt.UserLoginModel;
 import com.zhangling.bluetooth.service.UserService;
 
@@ -26,6 +27,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import io.realm.Realm;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -65,6 +67,7 @@ public class LoginActivity extends BaseActivity {
                     public void onNext(ResponseModel<UserModel> userModelResponseModel) {
                         Logger.i(userModelResponseModel.getData().getAccount());
                         LoginActivity.this.finish();
+
                     }
 
                     @Override
@@ -74,7 +77,16 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onComplete() {
-
+                        final Realm mRealm= Realm.getDefaultInstance();
+                        mRealm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                //先查找后得到User对象
+                                AppConfigDBModel appConfigDBModel = mRealm.where(AppConfigDBModel.class).findFirst();
+                                appConfigDBModel.setUserDidLogin(true);
+                            }
+                        });
+                        UploadFileManager.getInstance().config();
                     }
                 });
             }

@@ -2,6 +2,7 @@ package com.zhangling.bluetooth;
 
 import android.Manifest;
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import com.orhanobut.logger.Logger;
 import com.zhangling.bluetooth.activity.DataFragment;
 import com.zhangling.bluetooth.activity.HomeActivity;
 import com.zhangling.bluetooth.activity.HomeFragment;
+import com.zhangling.bluetooth.activity.LoginActivity;
 import com.zhangling.bluetooth.activity.MeFragment;
 import com.zhangling.bluetooth.activity.SensorFragment;
 import com.zhangling.bluetooth.adapter.ClassDeviceListAdapter;
@@ -27,6 +29,7 @@ import com.zhangling.bluetooth.base.BaseActivity;
 import com.zhangling.bluetooth.manager.BlueToothManager;
 import com.zhangling.bluetooth.manager.ClassBlueToothManager;
 import com.zhangling.bluetooth.manager.UploadFileManager;
+import com.zhangling.bluetooth.model.db.AppConfigDBModel;
 import com.zhangling.bluetooth.util.ZLUtil;
 import com.zhangling.bluetooth.view.DeviceListView;
 
@@ -34,6 +37,7 @@ import java.text.DateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 public class MainActivity extends BaseActivity {
     private static MainActivity context;
@@ -57,7 +61,17 @@ public class MainActivity extends BaseActivity {
         }else {
 
         }
-        UploadFileManager.getInstance().config();
+        Realm  mRealm= Realm.getDefaultInstance();
+        AppConfigDBModel appConfigDBModel = mRealm.where(AppConfigDBModel.class)
+                .equalTo("id", getPackageName()).findFirst();
+
+        if (appConfigDBModel.isUserDidLogin()){
+            UploadFileManager.getInstance().config();
+        }else {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+
     }
 
     public static MainActivity getMainActivity() {
