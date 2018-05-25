@@ -26,6 +26,7 @@ import com.zhangling.bluetooth.adapter.DeviceListAdapter;
 import com.zhangling.bluetooth.base.BaseActivity;
 import com.zhangling.bluetooth.manager.BlueToothManager;
 import com.zhangling.bluetooth.manager.ClassBlueToothManager;
+import com.zhangling.bluetooth.manager.UploadFileManager;
 import com.zhangling.bluetooth.util.ZLUtil;
 import com.zhangling.bluetooth.view.DeviceListView;
 
@@ -56,6 +57,7 @@ public class MainActivity extends BaseActivity {
         }else {
 
         }
+        UploadFileManager.getInstance().config();
     }
 
     public static MainActivity getMainActivity() {
@@ -87,6 +89,8 @@ public class MainActivity extends BaseActivity {
 
 
     }
+
+
 
 
 

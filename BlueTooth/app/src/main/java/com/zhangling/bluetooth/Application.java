@@ -1,6 +1,12 @@
 package com.zhangling.bluetooth;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.DiskLogAdapter;
@@ -18,6 +24,7 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.zhangling.bluetooth.manager.UploadFileManager;
+import com.zhangling.bluetooth.receiver.NetworkConnectChangedReceiver;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,6 +46,7 @@ public class Application extends android.app.Application{
 //        Realm.setDefaultConfiguration(config);
         configLoger();
 //        UploadFileManager.getInstance().config();
+        registerNetworkReceiver(new NetworkConnectChangedReceiver(),new IntentFilter());
     }
 
     private void configLoger(){
@@ -67,5 +75,10 @@ public class Application extends android.app.Application{
      * 获取全局上下文*/
     public static Application getApplication() {
         return context;
+    }
+
+    public void registerNetworkReceiver(NetworkConnectChangedReceiver receiver, IntentFilter filter) {
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        context.registerReceiver(receiver,filter);
     }
 }

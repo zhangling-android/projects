@@ -18,6 +18,7 @@ public class RxBusManager {
     public static final int DeviceData = 10002;
     public static final int DeviceConnectionStatue = 10004;
     public static final int SearchClassDevice = 10003;
+    public static final int NetworkStatus = 10005;
     private static volatile RxBusManager instance;
 
     private Subject<Object> bus;

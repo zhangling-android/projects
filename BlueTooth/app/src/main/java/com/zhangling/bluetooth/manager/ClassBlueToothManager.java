@@ -42,6 +42,8 @@ import static android.bluetooth.BluetoothDevice.BOND_NONE;
 
 public class ClassBlueToothManager {
 
+
+
     public interface DeviceChangedCallback {
         public void changed(List<BluetoothDevice> mDevices);
         public void connected();

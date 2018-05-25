@@ -64,7 +64,6 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onNext(ResponseModel<UserModel> userModelResponseModel) {
                         Logger.i(userModelResponseModel.getData().getAccount());
-                        UploadFileManager.getInstance().config();
                         LoginActivity.this.finish();
                     }
 

@@ -3,6 +3,7 @@
     package="com.zhangling.bluetooth">
 
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -15,6 +16,8 @@
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="false" />
+
+
 
     <application
         android:name="com.zhangling.bluetooth.Application"
@@ -40,6 +43,8 @@
 
         <service
             android:name="com.inuker.bluetooth.library.BluetoothService" />
+        <receiver android:name=".receiver.NetworkConnectChangedReceiver">
+        </receiver>
     </application>
 
 </manifest>
