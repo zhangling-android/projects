@@ -4,7 +4,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.zhangling.bluetooth"
+        applicationId "com.ccydsz.cloudtest"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
@@ -15,6 +15,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            resValue("string", "PORT_NUMBER", "8081")
         }
     }
 }
@@ -49,4 +52,18 @@ dependencies {
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
     implementation 'com.hjm:BottomTabBar:1.2.0'
+
+    implementation 'com.hannesdorfmann.mosby3:mvi:3.1.1-SNAPSHOT'
+
+    implementation 'com.hannesdorfmann.mosby3:mvp:3.1.1-SNAPSHOT'
+    implementation 'com.hannesdorfmann.mosby3:viewstate:3.1.1-SNAPSHOT'
+
+    implementation 'com.hannesdorfmann.mosby3:mvp-lce:3.1.1-SNAPSHOT'
+    implementation 'com.hannesdorfmann.mosby3:mvp-nullobject-presenter:3.1.1-SNAPSHOT'
+    implementation 'com.hannesdorfmann.mosby3:mvp-queuing-presenter:3.1.1-SNAPSHOT'
+
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.3'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

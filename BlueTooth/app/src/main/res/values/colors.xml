@@ -5,11 +5,11 @@
     <!--<color name="colorAccent">#FF4081</color>-->
     <color name="colorPrimary">#5b9cd6</color>
     <color name="colorPrimaryDark">#5b9cd6</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#5b9cd6</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorClear">#00000000</color>
-    <color name="colorHalfWhite">#e0ffffff</color>
-    <color name="colorHalfBlack">#e0000000</color>
+    <color name="colorHalfWhite">#80ffffff</color>
+    <color name="colorHalfBlack">#80000000</color>
     <color name="colorBlack">#000000</color>
     <!--<color name="colorAccent">#5b9cd6</color>-->
 </resources>

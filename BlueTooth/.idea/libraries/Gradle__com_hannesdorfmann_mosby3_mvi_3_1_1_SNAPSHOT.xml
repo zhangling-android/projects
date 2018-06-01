@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.hannesdorfmann.mosby3:mvi-3.1.1-SNAPSHOT">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/mvi-3.1.1-SNAPSHOT.aar/e94b8b8427af4f1b71be487b97a49ffb/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/mvi-3.1.1-SNAPSHOT.aar/e94b8b8427af4f1b71be487b97a49ffb/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.hannesdorfmann.mosby3/mvi/3.1.1-SNAPSHOT/16ae47f3988dae949acf443a65c09042e621f972/mvi-3.1.1-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

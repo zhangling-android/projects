@@ -4,10 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/loading_view" />
+    <include layout="@layout/error_view" />
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/view">
+        android:id="@+id/contentView">
 
         <RelativeLayout
             android:id="@+id/bluetooth_view"
@@ -44,6 +47,35 @@
                     android:textAlignment="center"
                     />
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/car_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/car_icon"
+                android:layout_marginLeft="8dp"
+                android:text="@string/__" />
+
+            <ImageView
+                android:id="@+id/car_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:srcCompat="@mipmap/ic_launcher_round" />
+
+            <ImageButton
+                android:id="@+id/car_choose"
+                android:layout_width="@dimen/statueBarHeight"
+                android:layout_height="@dimen/statueBarHeight"
+                android:background="@color/colorClear"
+                android:layout_toRightOf="@id/car_name"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@mipmap/add" />
 
 
         </RelativeLayout>
